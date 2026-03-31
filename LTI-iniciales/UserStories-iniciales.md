@@ -306,3 +306,20 @@ Orden de implementación sugerido:
 - US-03 aporta valor diferencial con IA
 - US-04 permite gestionar el flujo de candidatos
 - US-05 y US-06 enriquecen la colaboración y el proceso
+
+## Definition of Ready (DoR)
+
+Una User Story estará lista para ser desarrollada cuando cumpla:
+
+- Tiene descripción clara como usuario (Como / Quiero / Para)
+- Tiene criterios de aceptación definidos (escenarios)
+- Están definidos los campos y datos necesarios
+- Se entienden las validaciones básicas
+- No existen bloqueos externos conocidos
+- Está estimada por el equipo
+- Se han identificado dependencias (si las hay)
+
+### Notas
+
+- Si falta información técnica (APIs, modelos de datos, etc.), debe aclararse antes de empezar
+- El equipo puede rechazar una US que no cumpla estos criterios
