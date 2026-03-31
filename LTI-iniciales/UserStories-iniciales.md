@@ -230,3 +230,95 @@ para avanzar en el proceso.
 - Tests básicos
 - Sin errores críticos
 - Deploy listo
+
+## Modelo de Datos (Data Model)
+
+A continuación se define un modelo de datos simplificado para el MVP de LTI.
+
+### Entidades principales
+
+#### JobPosition
+
+- id
+- title
+- department
+- location
+- contractType
+- description
+- requirements
+- status (`draft`, `published`)
+- createdAt
+
+#### Candidate
+
+- id
+- name
+- email
+- createdAt
+
+#### Application
+
+- id
+- candidateId
+- jobPositionId
+- cvUrl
+- status (`applied`, `review`, `interview`, `offer`, `rejected`)
+- score
+- createdAt
+
+#### ApplicationAnalysis
+
+- id
+- applicationId
+- extractedData (JSON)
+- score
+- processedAt
+- status (`pending`, `processed`, `error`)
+
+#### Feedback
+
+- id
+- applicationId
+- userId
+- rating
+- comments
+- strengths
+- risks
+- createdAt
+
+#### Interview
+
+- id
+- applicationId
+- date
+- status (`scheduled`, `completed`, `cancelled`)
+- notes
+
+#### User
+
+- id
+- name
+- email
+- role (`recruiter`, `hiring_manager`, `admin`)
+
+### Relaciones principales
+
+- Un `User` puede crear múltiples `JobPosition`
+- Un `Candidate` puede enviar múltiples `Application`
+- Una `JobPosition` puede recibir múltiples `Application`
+- Una `Application` puede tener un `ApplicationAnalysis`
+- Una `Application` puede tener múltiples `Feedback`
+- Una `Application` puede tener múltiples `Interview`
+
+### Diagrama entidad-relación
+
+```mermaid
+erDiagram
+    USER ||--o{ JOB_POSITION : creates
+    CANDIDATE ||--o{ APPLICATION : submits
+    JOB_POSITION ||--o{ APPLICATION : receives
+    APPLICATION ||--|| APPLICATION_ANALYSIS : has
+    APPLICATION ||--o{ FEEDBACK : receives
+    APPLICATION ||--o{ INTERVIEW : includes
+    USER ||--o{ FEEDBACK : writes
+```
