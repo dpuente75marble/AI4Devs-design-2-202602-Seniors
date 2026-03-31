@@ -110,3 +110,48 @@ entonces recibo una confirmación de que mi candidatura ha sido recibida.
 - **Estimable**: sí, el alcance es claro.
 - **Small**: sí, es implementable en un sprint.
 - **Testable**: sí, los escenarios son verificables.
+
+### US-03 - Análisis automático de CV con IA
+
+**Historia de usuario**  
+Como recruiter,  
+quiero que el sistema analice automáticamente los CVs recibidos,  
+para obtener información estructurada y un scoring inicial de los candidatos.
+
+**Criterios de aceptación**
+
+**Escenario 1 - Extracción de información del CV**  
+Dado que un candidato ha enviado su CV,  
+cuando el sistema procesa el documento,  
+entonces extrae información relevante como nombre, experiencia, habilidades y formación.
+
+**Escenario 2 - Generación de scoring inicial**  
+Dado que el CV ha sido procesado,  
+cuando el sistema analiza la información extraída,  
+entonces asigna un score inicial basado en criterios definidos (skills, experiencia, etc.).
+
+**Escenario 3 - Persistencia de resultados**  
+Dado que el CV ha sido analizado,  
+cuando finaliza el procesamiento,  
+entonces los datos estructurados y el score quedan almacenados en el sistema.
+
+**Escenario 4 - Gestión de errores**  
+Dado que el CV no puede ser procesado correctamente,  
+cuando ocurre un error en el análisis,  
+entonces el sistema registra el error y marca la candidatura como pendiente de revisión manual.
+
+**Notas adicionales**
+
+- Uso de LLM para parsing de CV.
+- Generación de JSON estructurado.
+- Score inicial basado en reglas simples o IA.
+- Preparado para evolución futura a ranking avanzado.
+
+**Evaluación INVEST**
+
+- **Independent**: sí, desacoplado del resto del pipeline.
+- **Negotiable**: sí, el modelo y criterios pueden evolucionar.
+- **Valuable**: sí, reduce trabajo manual del recruiter.
+- **Estimable**: sí, se puede dividir en parsing + scoring.
+- **Small**: medio, pero abordable en un sprint.
+- **Testable**: sí, con validación de outputs estructurados.
