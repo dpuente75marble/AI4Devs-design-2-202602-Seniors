@@ -30,3 +30,83 @@ Quedan fuera de alcance en esta fase:
 - Integraciones con job boards externos
 - Automatización avanzada de decisiones
 - Analítica avanzada
+
+## User Stories
+
+### US-01 - Crear una vacante
+
+**Historia de usuario**  
+Como recruiter,  
+quiero crear una vacante con la información principal del puesto,  
+para iniciar un nuevo proceso de selección de forma estructurada.
+
+**Criterios de aceptación**
+
+**Escenario 1 - Creación correcta de la vacante**  
+Dado que soy un recruiter autenticado,  
+cuando completo los campos obligatorios de la vacante y guardo la información,  
+entonces el sistema crea la vacante con estado "draft" y la muestra en mi listado de vacantes.
+
+**Escenario 2 - Validación de campos obligatorios**  
+Dado que estoy creando una vacante,  
+cuando intento guardar el formulario sin informar uno o más campos obligatorios,  
+entonces el sistema muestra mensajes de validación claros y no permite guardar la vacante.
+
+**Escenario 3 - Edición antes de publicación**  
+Dado que he creado una vacante en estado "draft",  
+cuando accedo de nuevo a su detalle y modifico su información,  
+entonces el sistema guarda los cambios y mantiene la vacante actualizada sin publicarla automáticamente.
+
+**Notas adicionales**
+
+- Campos mínimos sugeridos: título del puesto, departamento, ubicación, tipo de contrato, descripción y requisitos.
+- La vacante debe quedar inicialmente en estado `draft`.
+- Esta historia es base para el resto del flujo del MVP.
+
+**Evaluación INVEST**
+
+- **Independent**: sí, puede implementarse sin depender del resto de historias del pipeline.
+- **Negotiable**: sí, los detalles del formulario pueden ajustarse durante refinamiento.
+- **Valuable**: sí, aporta valor directo al recruiter al iniciar el proceso.
+- **Estimable**: sí, el alcance es entendible y estimable.
+- **Small**: sí, es abordable en una iteración.
+- **Testable**: sí, los criterios de aceptación son verificables.
+
+### US-02 - Recepción de candidaturas
+
+**Historia de usuario**  
+Como candidato,  
+quiero poder aplicar a una vacante enviando mi CV,  
+para participar en el proceso de selección.
+
+**Criterios de aceptación**
+
+**Escenario 1 - Aplicación exitosa**  
+Dado que accedo a una vacante publicada,  
+cuando completo el formulario de candidatura y adjunto mi CV,  
+entonces el sistema registra mi candidatura y la asocia a la vacante correspondiente.
+
+**Escenario 2 - Validación de información requerida**  
+Dado que estoy aplicando a una vacante,  
+cuando intento enviar la candidatura sin completar los campos obligatorios,  
+entonces el sistema muestra mensajes de error y no permite enviar la solicitud.
+
+**Escenario 3 - Confirmación al candidato**  
+Dado que he enviado correctamente mi candidatura,  
+cuando se registra en el sistema,  
+entonces recibo una confirmación de que mi candidatura ha sido recibida.
+
+**Notas adicionales**
+
+- Campos mínimos: nombre, email, CV adjunto.
+- El CV debe almacenarse de forma segura.
+- Se debe crear una entidad `Application` asociada a `Candidate` y `JobPosition`.
+
+**Evaluación INVEST**
+
+- **Independent**: sí, puede implementarse independientemente del pipeline.
+- **Negotiable**: sí, el formulario puede evolucionar.
+- **Valuable**: sí, permite la entrada de candidatos al sistema.
+- **Estimable**: sí, el alcance es claro.
+- **Small**: sí, es implementable en un sprint.
+- **Testable**: sí, los escenarios son verificables.
