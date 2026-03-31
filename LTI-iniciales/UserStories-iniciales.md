@@ -288,3 +288,21 @@ entonces el sistema actualiza la información y notifica el cambio.
 - **Estimable**: sí, alcance claro.
 - **Small**: sí, versión básica abordable.
 - **Testable**: sí, validación de creación y actualización.
+
+## Priorización del backlog (MVP)
+
+Orden de implementación sugerido:
+
+1. US-01 - Crear una vacante
+2. US-02 - Recepción de candidaturas
+3. US-03 - Análisis automático de CV con IA
+4. US-04 - Visualización de candidatos en pipeline
+5. US-05 - Registro de feedback estructurado
+6. US-06 - Planificación de entrevistas
+
+### Justificación
+
+- US-01 y US-02 son la base del sistema (sin vacantes ni candidaturas no hay producto)
+- US-03 aporta valor diferencial con IA
+- US-04 permite gestionar el flujo de candidatos
+- US-05 y US-06 enriquecen la colaboración y el proceso
