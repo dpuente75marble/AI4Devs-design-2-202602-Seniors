@@ -35,13 +35,26 @@ Quedan fuera de alcance en esta fase:
 
 ---
 
+## User Story Mapping
+
+````mermaid
+flowchart LR
+
+A[Registro empresa] --> B[Crear oferta]
+B --> C[Subir CV]
+C --> D[Análisis automático IA]
+D --> E[Visualizar scoring]
+E --> F[Feedback candidato]
+
+---
+
 ## User Stories
 
 ### US-01 - Crear una vacante
 
-**Historia de usuario**  
-Como recruiter,  
-quiero crear una vacante con la información principal del puesto,  
+**Historia de usuario**
+Como recruiter,
+quiero crear una vacante con la información principal del puesto,
 para iniciar un nuevo proceso de selección de forma estructurada.
 
 **Criterios de aceptación**
@@ -66,9 +79,9 @@ para iniciar un nuevo proceso de selección de forma estructurada.
 
 ### US-02 - Recepción de candidaturas
 
-**Historia de usuario**  
-Como candidato,  
-quiero aplicar a una vacante enviando mi CV,  
+**Historia de usuario**
+Como candidato,
+quiero aplicar a una vacante enviando mi CV,
 para participar en el proceso.
 
 **Criterios de aceptación**
@@ -92,9 +105,9 @@ para participar en el proceso.
 
 ### US-03 - Análisis automático de CV con IA
 
-**Historia de usuario**  
-Como recruiter,  
-quiero que el sistema analice CVs automáticamente,  
+**Historia de usuario**
+Como recruiter,
+quiero que el sistema analice CVs automáticamente,
 para obtener scoring e información estructurada.
 
 **Criterios de aceptación**
@@ -121,9 +134,9 @@ para obtener scoring e información estructurada.
 
 ### US-04 - Visualización de candidatos en pipeline
 
-**Historia de usuario**  
-Como recruiter,  
-quiero ver candidatos en pipeline,  
+**Historia de usuario**
+Como recruiter,
+quiero ver candidatos en pipeline,
 para gestionar el proceso.
 
 **Criterios de aceptación**
@@ -149,9 +162,9 @@ para gestionar el proceso.
 
 ### US-05 - Registro de feedback estructurado
 
-**Historia de usuario**  
-Como hiring manager,  
-quiero registrar feedback,  
+**Historia de usuario**
+Como hiring manager,
+quiero registrar feedback,
 para colaborar en decisiones.
 
 **Criterios de aceptación**
@@ -176,9 +189,9 @@ para colaborar en decisiones.
 
 ### US-06 - Planificación de entrevistas
 
-**Historia de usuario**  
-Como recruiter,  
-quiero planificar entrevistas,  
+**Historia de usuario**
+Como recruiter,
+quiero planificar entrevistas,
 para avanzar en el proceso.
 
 **Criterios de aceptación**
@@ -321,7 +334,7 @@ erDiagram
     APPLICATION ||--o{ FEEDBACK : receives
     APPLICATION ||--o{ INTERVIEW : includes
     USER ||--o{ FEEDBACK : writes
-```
+````
 
 ## Arquitectura de alto nivel
 
