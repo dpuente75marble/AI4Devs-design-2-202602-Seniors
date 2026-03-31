@@ -323,3 +323,21 @@ Una User Story estará lista para ser desarrollada cuando cumpla:
 
 - Si falta información técnica (APIs, modelos de datos, etc.), debe aclararse antes de empezar
 - El equipo puede rechazar una US que no cumpla estos criterios
+
+## Definition of Done (DoD)
+
+Una User Story se considera terminada cuando:
+
+- El desarrollo está completado según los criterios de aceptación
+- El código cumple estándares del proyecto (clean code, naming, etc.)
+- Se han realizado pruebas unitarias básicas
+- No hay errores críticos conocidos
+- Se ha validado manualmente el flujo funcional
+- El código ha sido revisado (code review)
+- Está integrado en la rama principal sin conflictos
+
+### Notas
+
+- Se debe asegurar que no se rompe funcionalidad existente
+- Se deben contemplar casos de error básicos
+- La historia debe poder ser demostrada (demo)
