@@ -322,3 +322,47 @@ erDiagram
     APPLICATION ||--o{ INTERVIEW : includes
     USER ||--o{ FEEDBACK : writes
 ```
+
+## Arquitectura de alto nivel
+
+El sistema LTI se basa en una arquitectura desacoplada con separación entre frontend, backend y servicios externos.
+
+### Componentes principales
+
+- **Frontend (React)**
+  - Gestión de UI (vacantes, pipeline, feedback)
+  - Comunicación con backend vía API REST
+
+- **Backend (Node.js / Express)**
+  - Gestión de lógica de negocio
+  - Exposición de endpoints REST
+  - Gestión de autenticación y permisos
+
+- **Base de datos**
+  - Persistencia de entidades principales (JobPosition, Application, etc.)
+
+- **Servicio de IA**
+  - Procesamiento de CVs
+  - Generación de scoring
+  - Extracción de información estructurada
+
+- **Sistema de almacenamiento**
+  - Almacenamiento de CVs (ej: S3)
+
+- **Sistema de notificaciones**
+  - Emails para candidatos (entrevistas, confirmaciones)
+
+### Flujo simplificado
+
+1. Recruiter crea vacante
+2. Candidate aplica → se almacena CV
+3. Sistema procesa CV con IA
+4. Recruiter gestiona pipeline
+5. Hiring manager añade feedback
+6. Se planifican entrevistas
+
+### Consideraciones
+
+- Arquitectura preparada para escalar (microservicios en futuro)
+- Procesos de IA desacoplados (async)
+- Separación clara de responsabilidades
