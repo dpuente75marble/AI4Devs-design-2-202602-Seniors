@@ -155,3 +155,48 @@ entonces el sistema registra el error y marca la candidatura como pendiente de r
 - **Estimable**: sí, se puede dividir en parsing + scoring.
 - **Small**: medio, pero abordable en un sprint.
 - **Testable**: sí, con validación de outputs estructurados.
+
+### US-04 - Visualización de candidatos en pipeline
+
+**Historia de usuario**  
+Como recruiter,  
+quiero visualizar los candidatos en un pipeline por estados,  
+para gestionar el proceso de selección de forma clara y organizada.
+
+**Criterios de aceptación**
+
+**Escenario 1 - Visualización del pipeline**  
+Dado que accedo a una vacante,  
+cuando entro en la vista de candidatos,  
+entonces veo un pipeline organizado por estados (ej: aplicado, en revisión, entrevista, oferta).
+
+**Escenario 2 - Movimiento de candidatos entre estados**  
+Dado que estoy gestionando candidatos,  
+cuando arrastro un candidato a otro estado,  
+entonces el sistema actualiza su estado correctamente.
+
+**Escenario 3 - Persistencia de cambios**  
+Dado que he cambiado el estado de un candidato,  
+cuando refresco la página o vuelvo a entrar,  
+entonces el candidato mantiene su nuevo estado.
+
+**Escenario 4 - Visualización de información básica**  
+Dado que estoy viendo el pipeline,  
+cuando visualizo un candidato,  
+entonces veo información clave como nombre, score y posición actual.
+
+**Notas adicionales**
+
+- UI tipo kanban.
+- Estados configurables.
+- Integración con datos de Application.
+- Mostrar score generado por IA.
+
+**Evaluación INVEST**
+
+- **Independent**: sí, aunque usa datos previos, no depende funcionalmente.
+- **Negotiable**: sí, diseño y estados pueden cambiar.
+- **Valuable**: sí, mejora la gestión del recruiter.
+- **Estimable**: sí, frontend + backend claros.
+- **Small**: sí, MVP del pipeline es abordable.
+- **Testable**: sí, mediante validación de estados y persistencia.
