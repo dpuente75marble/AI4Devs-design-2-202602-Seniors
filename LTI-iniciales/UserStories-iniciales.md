@@ -200,3 +200,47 @@ entonces veo información clave como nombre, score y posición actual.
 - **Estimable**: sí, frontend + backend claros.
 - **Small**: sí, MVP del pipeline es abordable.
 - **Testable**: sí, mediante validación de estados y persistencia.
+
+### US-05 - Registro de feedback estructurado
+
+**Historia de usuario**  
+Como hiring manager,  
+quiero registrar feedback estructurado sobre un candidato,  
+para colaborar con el recruiter en la toma de decisiones del proceso.
+
+**Criterios de aceptación**
+
+**Escenario 1 - Registro de feedback**  
+Dado que estoy revisando un candidato,  
+cuando completo y envío un formulario de evaluación,  
+entonces el sistema guarda mi feedback asociado a esa candidatura.
+
+**Escenario 2 - Visualización de feedback previo**  
+Dado que existe feedback registrado sobre un candidato,  
+cuando accedo a su detalle,  
+entonces puedo consultar las evaluaciones realizadas previamente por otros usuarios autorizados.
+
+**Escenario 3 - Validación de permisos**  
+Dado que un usuario sin permisos intenta acceder al feedback,  
+cuando intenta visualizar o registrar una evaluación,  
+entonces el sistema deniega el acceso.
+
+**Escenario 4 - Estructura común de evaluación**  
+Dado que estoy completando una evaluación,  
+cuando accedo al formulario,  
+entonces veo campos estructurados como valoración general, comentarios, fortalezas y riesgos detectados.
+
+**Notas adicionales**
+
+- La evaluación debe quedar vinculada a `Application` y `User`.
+- Se debe contemplar RBAC básico.
+- Esta historia prepara el terreno para consolidación futura de feedback por IA.
+
+**Evaluación INVEST**
+
+- **Independent**: sí, puede implementarse como módulo separado.
+- **Negotiable**: sí, la estructura del feedback puede ajustarse.
+- **Valuable**: sí, aporta colaboración real al proceso.
+- **Estimable**: sí, alcance funcional claro.
+- **Small**: sí, viable para MVP.
+- **Testable**: sí, con validación funcional y de permisos.
