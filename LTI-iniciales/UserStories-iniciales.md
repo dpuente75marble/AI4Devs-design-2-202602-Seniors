@@ -244,3 +244,47 @@ entonces veo campos estructurados como valoración general, comentarios, fortale
 - **Estimable**: sí, alcance funcional claro.
 - **Small**: sí, viable para MVP.
 - **Testable**: sí, con validación funcional y de permisos.
+
+### US-06 - Planificación de entrevistas
+
+**Historia de usuario**  
+Como recruiter,  
+quiero planificar entrevistas con los candidatos,  
+para avanzar en el proceso de selección de forma organizada.
+
+**Criterios de aceptación**
+
+**Escenario 1 - Creación de entrevista**  
+Dado que estoy gestionando un candidato,  
+cuando creo una entrevista indicando fecha y hora,  
+entonces el sistema registra la entrevista asociada a la candidatura.
+
+**Escenario 2 - Notificación al candidato**  
+Dado que se ha creado una entrevista,  
+cuando se confirma la programación,  
+entonces el candidato recibe una notificación con los detalles.
+
+**Escenario 3 - Visualización de entrevistas**  
+Dado que existen entrevistas programadas,  
+cuando accedo al perfil del candidato,  
+entonces puedo ver el listado de entrevistas asociadas.
+
+**Escenario 4 - Reprogramación**  
+Dado que una entrevista ya existe,  
+cuando modifico su fecha u hora,  
+entonces el sistema actualiza la información y notifica el cambio.
+
+**Notas adicionales**
+
+- Integración futura con calendario (Google/Outlook).
+- Entidad `Interview` vinculada a `Application`.
+- Sistema básico de notificaciones.
+
+**Evaluación INVEST**
+
+- **Independent**: sí, funcionalidad desacoplada.
+- **Negotiable**: sí, detalles de integración pueden cambiar.
+- **Valuable**: sí, clave en el proceso de selección.
+- **Estimable**: sí, alcance claro.
+- **Small**: sí, versión básica abordable.
+- **Testable**: sí, validación de creación y actualización.
