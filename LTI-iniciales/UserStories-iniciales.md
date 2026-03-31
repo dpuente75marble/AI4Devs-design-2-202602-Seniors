@@ -16,6 +16,8 @@ Para la definición de las User Stories y el backlog se han tomado como base:
 Repositorio del PRD base:
 https://github.com/dpuente75marble/AI4Devs-design-1-202602-Seniors/blob/feature/lti-ddlp/lti/ddlp/LTI-iniciales.md
 
+---
+
 ## Scope de esta iteración (MVP)
 
 Este backlog se centra en una primera iteración del producto (MVP), priorizando:
@@ -31,6 +33,8 @@ Quedan fuera de alcance en esta fase:
 - Automatización avanzada de decisiones
 - Analítica avanzada
 
+---
+
 ## User Stories
 
 ### US-01 - Crear una vacante
@@ -42,302 +46,187 @@ para iniciar un nuevo proceso de selección de forma estructurada.
 
 **Criterios de aceptación**
 
-**Escenario 1 - Creación correcta de la vacante**  
-Dado que soy un recruiter autenticado,  
-cuando completo los campos obligatorios de la vacante y guardo la información,  
-entonces el sistema crea la vacante con estado "draft" y la muestra en mi listado de vacantes.
-
-**Escenario 2 - Validación de campos obligatorios**  
-Dado que estoy creando una vacante,  
-cuando intento guardar el formulario sin informar uno o más campos obligatorios,  
-entonces el sistema muestra mensajes de validación claros y no permite guardar la vacante.
-
-**Escenario 3 - Edición antes de publicación**  
-Dado que he creado una vacante en estado "draft",  
-cuando accedo de nuevo a su detalle y modifico su información,  
-entonces el sistema guarda los cambios y mantiene la vacante actualizada sin publicarla automáticamente.
+- Creación correcta en estado draft
+- Validación de campos obligatorios
+- Edición antes de publicación
 
 **Notas adicionales**
 
-- Campos mínimos sugeridos: título del puesto, departamento, ubicación, tipo de contrato, descripción y requisitos.
-- La vacante debe quedar inicialmente en estado `draft`.
-- Esta historia es base para el resto del flujo del MVP.
+- Campos mínimos: título, departamento, ubicación, tipo de contrato, descripción, requisitos
+- Estado inicial: draft
 
-**Evaluación INVEST**
+**Consideraciones técnicas**
 
-- **Independent**: sí, puede implementarse sin depender del resto de historias del pipeline.
-- **Negotiable**: sí, los detalles del formulario pueden ajustarse durante refinamiento.
-- **Valuable**: sí, aporta valor directo al recruiter al iniciar el proceso.
-- **Estimable**: sí, el alcance es entendible y estimable.
-- **Small**: sí, es abordable en una iteración.
-- **Testable**: sí, los criterios de aceptación son verificables.
+- Endpoint: `POST /job-positions`
+- Modelo: `JobPosition`
+- Validación en frontend y backend
+- Persistencia en base de datos relacional
+
+---
 
 ### US-02 - Recepción de candidaturas
 
 **Historia de usuario**  
 Como candidato,  
-quiero poder aplicar a una vacante enviando mi CV,  
-para participar en el proceso de selección.
+quiero aplicar a una vacante enviando mi CV,  
+para participar en el proceso.
 
 **Criterios de aceptación**
 
-**Escenario 1 - Aplicación exitosa**  
-Dado que accedo a una vacante publicada,  
-cuando completo el formulario de candidatura y adjunto mi CV,  
-entonces el sistema registra mi candidatura y la asocia a la vacante correspondiente.
-
-**Escenario 2 - Validación de información requerida**  
-Dado que estoy aplicando a una vacante,  
-cuando intento enviar la candidatura sin completar los campos obligatorios,  
-entonces el sistema muestra mensajes de error y no permite enviar la solicitud.
-
-**Escenario 3 - Confirmación al candidato**  
-Dado que he enviado correctamente mi candidatura,  
-cuando se registra en el sistema,  
-entonces recibo una confirmación de que mi candidatura ha sido recibida.
+- Aplicación exitosa
+- Validación de campos
+- Confirmación al usuario
 
 **Notas adicionales**
 
-- Campos mínimos: nombre, email, CV adjunto.
-- El CV debe almacenarse de forma segura.
-- Se debe crear una entidad `Application` asociada a `Candidate` y `JobPosition`.
+- Campos: nombre, email, CV
 
-**Evaluación INVEST**
+**Consideraciones técnicas**
 
-- **Independent**: sí, puede implementarse independientemente del pipeline.
-- **Negotiable**: sí, el formulario puede evolucionar.
-- **Valuable**: sí, permite la entrada de candidatos al sistema.
-- **Estimable**: sí, el alcance es claro.
-- **Small**: sí, es implementable en un sprint.
-- **Testable**: sí, los escenarios son verificables.
+- Endpoint: `POST /applications`
+- Upload de archivos (CV)
+- Almacenamiento en storage (S3 o similar)
+- Modelos: `Candidate`, `Application`, `JobPosition`
+
+---
 
 ### US-03 - Análisis automático de CV con IA
 
 **Historia de usuario**  
 Como recruiter,  
-quiero que el sistema analice automáticamente los CVs recibidos,  
-para obtener información estructurada y un scoring inicial de los candidatos.
+quiero que el sistema analice CVs automáticamente,  
+para obtener scoring e información estructurada.
 
 **Criterios de aceptación**
 
-**Escenario 1 - Extracción de información del CV**  
-Dado que un candidato ha enviado su CV,  
-cuando el sistema procesa el documento,  
-entonces extrae información relevante como nombre, experiencia, habilidades y formación.
-
-**Escenario 2 - Generación de scoring inicial**  
-Dado que el CV ha sido procesado,  
-cuando el sistema analiza la información extraída,  
-entonces asigna un score inicial basado en criterios definidos (skills, experiencia, etc.).
-
-**Escenario 3 - Persistencia de resultados**  
-Dado que el CV ha sido analizado,  
-cuando finaliza el procesamiento,  
-entonces los datos estructurados y el score quedan almacenados en el sistema.
-
-**Escenario 4 - Gestión de errores**  
-Dado que el CV no puede ser procesado correctamente,  
-cuando ocurre un error en el análisis,  
-entonces el sistema registra el error y marca la candidatura como pendiente de revisión manual.
+- Extracción de datos
+- Generación de score
+- Persistencia
+- Gestión de errores
 
 **Notas adicionales**
 
-- Uso de LLM para parsing de CV.
-- Generación de JSON estructurado.
-- Score inicial basado en reglas simples o IA.
-- Preparado para evolución futura a ranking avanzado.
+- Uso de IA (LLM)
+- JSON estructurado
 
-**Evaluación INVEST**
+**Consideraciones técnicas**
 
-- **Independent**: sí, desacoplado del resto del pipeline.
-- **Negotiable**: sí, el modelo y criterios pueden evolucionar.
-- **Valuable**: sí, reduce trabajo manual del recruiter.
-- **Estimable**: sí, se puede dividir en parsing + scoring.
-- **Small**: medio, pero abordable en un sprint.
-- **Testable**: sí, con validación de outputs estructurados.
+- Servicio de procesamiento asíncrono
+- Integración con API de IA
+- Modelo: `ApplicationAnalysis`
+- Cola de procesamiento (queue)
+- Manejo de errores y reintentos
+
+---
 
 ### US-04 - Visualización de candidatos en pipeline
 
 **Historia de usuario**  
 Como recruiter,  
-quiero visualizar los candidatos en un pipeline por estados,  
-para gestionar el proceso de selección de forma clara y organizada.
+quiero ver candidatos en pipeline,  
+para gestionar el proceso.
 
 **Criterios de aceptación**
 
-**Escenario 1 - Visualización del pipeline**  
-Dado que accedo a una vacante,  
-cuando entro en la vista de candidatos,  
-entonces veo un pipeline organizado por estados (ej: aplicado, en revisión, entrevista, oferta).
-
-**Escenario 2 - Movimiento de candidatos entre estados**  
-Dado que estoy gestionando candidatos,  
-cuando arrastro un candidato a otro estado,  
-entonces el sistema actualiza su estado correctamente.
-
-**Escenario 3 - Persistencia de cambios**  
-Dado que he cambiado el estado de un candidato,  
-cuando refresco la página o vuelvo a entrar,  
-entonces el candidato mantiene su nuevo estado.
-
-**Escenario 4 - Visualización de información básica**  
-Dado que estoy viendo el pipeline,  
-cuando visualizo un candidato,  
-entonces veo información clave como nombre, score y posición actual.
+- Visualización tipo kanban
+- Cambio de estado drag & drop
+- Persistencia
+- Información básica visible
 
 **Notas adicionales**
 
-- UI tipo kanban.
-- Estados configurables.
-- Integración con datos de Application.
-- Mostrar score generado por IA.
+- Estados configurables
 
-**Evaluación INVEST**
+**Consideraciones técnicas**
 
-- **Independent**: sí, aunque usa datos previos, no depende funcionalmente.
-- **Negotiable**: sí, diseño y estados pueden cambiar.
-- **Valuable**: sí, mejora la gestión del recruiter.
-- **Estimable**: sí, frontend + backend claros.
-- **Small**: sí, MVP del pipeline es abordable.
-- **Testable**: sí, mediante validación de estados y persistencia.
+- Endpoint: `GET /applications`
+- Endpoint: `PATCH /applications/{id}`
+- Estado almacenado en BD
+- Frontend con drag & drop
+- Sincronización en tiempo real (opcional)
+
+---
 
 ### US-05 - Registro de feedback estructurado
 
 **Historia de usuario**  
 Como hiring manager,  
-quiero registrar feedback estructurado sobre un candidato,  
-para colaborar con el recruiter en la toma de decisiones del proceso.
+quiero registrar feedback,  
+para colaborar en decisiones.
 
 **Criterios de aceptación**
 
-**Escenario 1 - Registro de feedback**  
-Dado que estoy revisando un candidato,  
-cuando completo y envío un formulario de evaluación,  
-entonces el sistema guarda mi feedback asociado a esa candidatura.
-
-**Escenario 2 - Visualización de feedback previo**  
-Dado que existe feedback registrado sobre un candidato,  
-cuando accedo a su detalle,  
-entonces puedo consultar las evaluaciones realizadas previamente por otros usuarios autorizados.
-
-**Escenario 3 - Validación de permisos**  
-Dado que un usuario sin permisos intenta acceder al feedback,  
-cuando intenta visualizar o registrar una evaluación,  
-entonces el sistema deniega el acceso.
-
-**Escenario 4 - Estructura común de evaluación**  
-Dado que estoy completando una evaluación,  
-cuando accedo al formulario,  
-entonces veo campos estructurados como valoración general, comentarios, fortalezas y riesgos detectados.
+- Registro de feedback
+- Visualización
+- Control de permisos
 
 **Notas adicionales**
 
-- La evaluación debe quedar vinculada a `Application` y `User`.
-- Se debe contemplar RBAC básico.
-- Esta historia prepara el terreno para consolidación futura de feedback por IA.
+- RBAC básico
 
-**Evaluación INVEST**
+**Consideraciones técnicas**
 
-- **Independent**: sí, puede implementarse como módulo separado.
-- **Negotiable**: sí, la estructura del feedback puede ajustarse.
-- **Valuable**: sí, aporta colaboración real al proceso.
-- **Estimable**: sí, alcance funcional claro.
-- **Small**: sí, viable para MVP.
-- **Testable**: sí, con validación funcional y de permisos.
+- Endpoint: `POST /feedback`
+- Endpoint: `GET /feedback`
+- Modelo: `Feedback`
+- Sistema de roles y permisos
+- Relación con `Application` y `User`
+
+---
 
 ### US-06 - Planificación de entrevistas
 
 **Historia de usuario**  
 Como recruiter,  
-quiero planificar entrevistas con los candidatos,  
-para avanzar en el proceso de selección de forma organizada.
+quiero planificar entrevistas,  
+para avanzar en el proceso.
 
 **Criterios de aceptación**
 
-**Escenario 1 - Creación de entrevista**  
-Dado que estoy gestionando un candidato,  
-cuando creo una entrevista indicando fecha y hora,  
-entonces el sistema registra la entrevista asociada a la candidatura.
-
-**Escenario 2 - Notificación al candidato**  
-Dado que se ha creado una entrevista,  
-cuando se confirma la programación,  
-entonces el candidato recibe una notificación con los detalles.
-
-**Escenario 3 - Visualización de entrevistas**  
-Dado que existen entrevistas programadas,  
-cuando accedo al perfil del candidato,  
-entonces puedo ver el listado de entrevistas asociadas.
-
-**Escenario 4 - Reprogramación**  
-Dado que una entrevista ya existe,  
-cuando modifico su fecha u hora,  
-entonces el sistema actualiza la información y notifica el cambio.
+- Creación
+- Notificación
+- Visualización
+- Reprogramación
 
 **Notas adicionales**
 
-- Integración futura con calendario (Google/Outlook).
-- Entidad `Interview` vinculada a `Application`.
-- Sistema básico de notificaciones.
+- Integración futura con calendarios
 
-**Evaluación INVEST**
+**Consideraciones técnicas**
 
-- **Independent**: sí, funcionalidad desacoplada.
-- **Negotiable**: sí, detalles de integración pueden cambiar.
-- **Valuable**: sí, clave en el proceso de selección.
-- **Estimable**: sí, alcance claro.
-- **Small**: sí, versión básica abordable.
-- **Testable**: sí, validación de creación y actualización.
+- Endpoint: `POST /interviews`
+- Endpoint: `PATCH /interviews/{id}`
+- Modelo: `Interview`
+- Sistema de notificaciones (email)
+- Integración futura con Google/Outlook
+
+---
 
 ## Priorización del backlog (MVP)
 
-Orden de implementación sugerido:
+1. US-01
+2. US-02
+3. US-03
+4. US-04
+5. US-05
+6. US-06
 
-1. US-01 - Crear una vacante
-2. US-02 - Recepción de candidaturas
-3. US-03 - Análisis automático de CV con IA
-4. US-04 - Visualización de candidatos en pipeline
-5. US-05 - Registro de feedback estructurado
-6. US-06 - Planificación de entrevistas
-
-### Justificación
-
-- US-01 y US-02 son la base del sistema (sin vacantes ni candidaturas no hay producto)
-- US-03 aporta valor diferencial con IA
-- US-04 permite gestionar el flujo de candidatos
-- US-05 y US-06 enriquecen la colaboración y el proceso
+---
 
 ## Definition of Ready (DoR)
 
-Una User Story estará lista para ser desarrollada cuando cumpla:
+- Historia clara
+- Criterios definidos
+- Datos conocidos
+- Sin bloqueos
+- Estimada
 
-- Tiene descripción clara como usuario (Como / Quiero / Para)
-- Tiene criterios de aceptación definidos (escenarios)
-- Están definidos los campos y datos necesarios
-- Se entienden las validaciones básicas
-- No existen bloqueos externos conocidos
-- Está estimada por el equipo
-- Se han identificado dependencias (si las hay)
-
-### Notas
-
-- Si falta información técnica (APIs, modelos de datos, etc.), debe aclararse antes de empezar
-- El equipo puede rechazar una US que no cumpla estos criterios
+---
 
 ## Definition of Done (DoD)
 
-Una User Story se considera terminada cuando:
-
-- El desarrollo está completado según los criterios de aceptación
-- El código cumple estándares del proyecto (clean code, naming, etc.)
-- Se han realizado pruebas unitarias básicas
-- No hay errores críticos conocidos
-- Se ha validado manualmente el flujo funcional
-- El código ha sido revisado (code review)
-- Está integrado en la rama principal sin conflictos
-
-### Notas
-
-- Se debe asegurar que no se rompe funcionalidad existente
-- Se deben contemplar casos de error básicos
-- La historia debe poder ser demostrada (demo)
+- Desarrollo completado
+- Código revisado
+- Tests básicos
+- Sin errores críticos
+- Deploy listo
