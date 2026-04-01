@@ -8,10 +8,10 @@ El producto definido es LTI, una plataforma ATS (Applicant Tracking System) AI-n
 
 Para la definición de las User Stories y el backlog se han tomado como base:
 
-- Funcionalidades clave definidas en el PRD
-- Casos de uso principales
-- Modelo de datos inicial
-- Arquitectura de alto nivel
+* Funcionalidades clave definidas en el PRD
+* Casos de uso principales
+* Modelo de datos inicial
+* Arquitectura de alto nivel
 
 Repositorio del PRD base:
 https://github.com/dpuente75marble/AI4Devs-design-1-202602-Seniors/blob/feature/lti-ddlp/lti/ddlp/LTI-iniciales.md
@@ -22,29 +22,29 @@ https://github.com/dpuente75marble/AI4Devs-design-1-202602-Seniors/blob/feature/
 
 Este backlog se centra en una primera iteración del producto (MVP), priorizando:
 
-- Creación y gestión de vacantes
-- Recepción y visualización de candidaturas
-- Evaluación inicial con soporte de IA
-- Colaboración básica entre recruiters
+* Creación y gestión de vacantes
+* Recepción y visualización de candidaturas
+* Evaluación inicial con soporte de IA
+* Colaboración básica entre recruiters
 
 Quedan fuera de alcance en esta fase:
 
-- Integraciones con job boards externos
-- Automatización avanzada de decisiones
-- Analítica avanzada
+* Integraciones con job boards externos
+* Automatización avanzada de decisiones
+* Analítica avanzada
 
 ---
 
 ## User Story Mapping
 
-````mermaid
+```mermaid
 flowchart LR
-
-A[Registro empresa] --> B[Crear oferta]
-B --> C[Subir CV]
-C --> D[Análisis automático IA]
-D --> E[Visualizar scoring]
-E --> F[Feedback candidato]
+    A[Registro empresa] --> B[Crear oferta]
+    B --> C[Subir CV]
+    C --> D[Análisis automático IA]
+    D --> E[Visualizar scoring]
+    E --> F[Feedback candidato]
+```
 
 ---
 
@@ -59,21 +59,21 @@ para iniciar un nuevo proceso de selección de forma estructurada.
 
 **Criterios de aceptación**
 
-- Creación correcta en estado draft
-- Validación de campos obligatorios
-- Edición antes de publicación
+* Creación correcta en estado draft
+* Validación de campos obligatorios
+* Edición antes de publicación
 
 **Notas adicionales**
 
-- Campos mínimos: título, departamento, ubicación, tipo de contrato, descripción, requisitos
-- Estado inicial: draft
+* Campos mínimos: título, departamento, ubicación, tipo de contrato, descripción, requisitos
+* Estado inicial: draft
 
 **Consideraciones técnicas**
 
-- Endpoint: `POST /job-positions`
-- Modelo: `JobPosition`
-- Validación en frontend y backend
-- Persistencia en base de datos relacional
+* Endpoint: `POST /job-positions`
+* Modelo: `JobPosition`
+* Validación en frontend y backend
+* Persistencia en base de datos relacional
 
 ---
 
@@ -86,20 +86,20 @@ para participar en el proceso.
 
 **Criterios de aceptación**
 
-- Aplicación exitosa
-- Validación de campos
-- Confirmación al usuario
+* Aplicación exitosa
+* Validación de campos
+* Confirmación al usuario
 
 **Notas adicionales**
 
-- Campos: nombre, email, CV
+* Campos: nombre, email, CV
 
 **Consideraciones técnicas**
 
-- Endpoint: `POST /applications`
-- Upload de archivos (CV)
-- Almacenamiento en storage (S3 o similar)
-- Modelos: `Candidate`, `Application`, `JobPosition`
+* Endpoint: `POST /applications`
+* Upload de archivos (CV)
+* Almacenamiento en storage (S3 o similar)
+* Modelos: `Candidate`, `Application`, `JobPosition`
 
 ---
 
@@ -112,23 +112,23 @@ para obtener scoring e información estructurada.
 
 **Criterios de aceptación**
 
-- Extracción de datos
-- Generación de score
-- Persistencia
-- Gestión de errores
+* Extracción de datos
+* Generación de score
+* Persistencia
+* Gestión de errores
 
 **Notas adicionales**
 
-- Uso de IA (LLM)
-- JSON estructurado
+* Uso de IA (LLM)
+* JSON estructurado
 
 **Consideraciones técnicas**
 
-- Servicio de procesamiento asíncrono
-- Integración con API de IA
-- Modelo: `ApplicationAnalysis`
-- Cola de procesamiento (queue)
-- Manejo de errores y reintentos
+* Servicio de procesamiento asíncrono
+* Integración con API de IA
+* Modelo: `ApplicationAnalysis`
+* Cola de procesamiento (queue)
+* Manejo de errores y reintentos
 
 ---
 
@@ -141,22 +141,22 @@ para gestionar el proceso.
 
 **Criterios de aceptación**
 
-- Visualización tipo kanban
-- Cambio de estado drag & drop
-- Persistencia
-- Información básica visible
+* Visualización tipo kanban
+* Cambio de estado drag & drop
+* Persistencia
+* Información básica visible
 
 **Notas adicionales**
 
-- Estados configurables
+* Estados configurables
 
 **Consideraciones técnicas**
 
-- Endpoint: `GET /applications`
-- Endpoint: `PATCH /applications/{id}`
-- Estado almacenado en BD
-- Frontend con drag & drop
-- Sincronización en tiempo real (opcional)
+* Endpoint: `GET /applications`
+* Endpoint: `PATCH /applications/{id}`
+* Estado almacenado en BD
+* Frontend con drag & drop
+* Sincronización en tiempo real (opcional)
 
 ---
 
@@ -169,21 +169,21 @@ para colaborar en decisiones.
 
 **Criterios de aceptación**
 
-- Registro de feedback
-- Visualización
-- Control de permisos
+* Registro de feedback
+* Visualización
+* Control de permisos
 
 **Notas adicionales**
 
-- RBAC básico
+* RBAC básico
 
 **Consideraciones técnicas**
 
-- Endpoint: `POST /feedback`
-- Endpoint: `GET /feedback`
-- Modelo: `Feedback`
-- Sistema de roles y permisos
-- Relación con `Application` y `User`
+* Endpoint: `POST /feedback`
+* Endpoint: `GET /feedback`
+* Modelo: `Feedback`
+* Sistema de roles y permisos
+* Relación con `Application` y `User`
 
 ---
 
@@ -196,22 +196,22 @@ para avanzar en el proceso.
 
 **Criterios de aceptación**
 
-- Creación
-- Notificación
-- Visualización
-- Reprogramación
+* Creación
+* Notificación
+* Visualización
+* Reprogramación
 
 **Notas adicionales**
 
-- Integración futura con calendarios
+* Integración futura con calendarios
 
 **Consideraciones técnicas**
 
-- Endpoint: `POST /interviews`
-- Endpoint: `PATCH /interviews/{id}`
-- Modelo: `Interview`
-- Sistema de notificaciones (email)
-- Integración futura con Google/Outlook
+* Endpoint: `POST /interviews`
+* Endpoint: `PATCH /interviews/{id}`
+* Modelo: `Interview`
+* Sistema de notificaciones (email)
+* Integración futura con Google/Outlook
 
 ---
 
@@ -228,21 +228,23 @@ para avanzar en el proceso.
 
 ## Definition of Ready (DoR)
 
-- Historia clara
-- Criterios definidos
-- Datos conocidos
-- Sin bloqueos
-- Estimada
+* Historia clara
+* Criterios definidos
+* Datos conocidos
+* Sin bloqueos
+* Estimada
 
 ---
 
 ## Definition of Done (DoD)
 
-- Desarrollo completado
-- Código revisado
-- Tests básicos
-- Sin errores críticos
-- Deploy listo
+* Desarrollo completado
+* Código revisado
+* Tests básicos
+* Sin errores críticos
+* Deploy listo
+
+---
 
 ## Modelo de Datos (Data Model)
 
@@ -252,76 +254,80 @@ A continuación se define un modelo de datos simplificado para el MVP de LTI.
 
 #### JobPosition
 
-- id
-- title
-- department
-- location
-- contractType
-- description
-- requirements
-- status (`draft`, `published`)
-- createdAt
+* id
+* title
+* department
+* location
+* contractType
+* description
+* requirements
+* status (`draft`, `published`)
+* createdAt
 
 #### Candidate
 
-- id
-- name
-- email
-- createdAt
+* id
+* name
+* email
+* createdAt
 
 #### Application
 
-- id
-- candidateId
-- jobPositionId
-- cvUrl
-- status (`applied`, `review`, `interview`, `offer`, `rejected`)
-- score
-- createdAt
+* id
+* candidateId
+* jobPositionId
+* cvUrl
+* status (`applied`, `review`, `interview`, `offer`, `rejected`)
+* score
+* createdAt
 
 #### ApplicationAnalysis
 
-- id
-- applicationId
-- extractedData (JSON)
-- score
-- processedAt
-- status (`pending`, `processed`, `error`)
+* id
+* applicationId
+* extractedData (JSON)
+* score
+* processedAt
+* status (`pending`, `processed`, `error`)
 
 #### Feedback
 
-- id
-- applicationId
-- userId
-- rating
-- comments
-- strengths
-- risks
-- createdAt
+* id
+* applicationId
+* userId
+* rating
+* comments
+* strengths
+* risks
+* createdAt
 
 #### Interview
 
-- id
-- applicationId
-- date
-- status (`scheduled`, `completed`, `cancelled`)
-- notes
+* id
+* applicationId
+* date
+* status (`scheduled`, `completed`, `cancelled`)
+* notes
 
 #### User
 
-- id
-- name
-- email
-- role (`recruiter`, `hiring_manager`, `admin`)
+* id
+* name
+* email
+* role (`recruiter`, `hiring_manager`, `admin`)
+
+---
 
 ### Relaciones principales
 
-- Un `User` puede crear múltiples `JobPosition`
-- Un `Candidate` puede enviar múltiples `Application`
-- Una `JobPosition` puede recibir múltiples `Application`
-- Una `Application` puede tener un `ApplicationAnalysis`
-- Una `Application` puede tener múltiples `Feedback`
-- Una `Application` puede tener múltiples `Interview`
+* Un `User` puede crear múltiples `JobPosition`
+* Un `Candidate` puede enviar múltiples `Application`
+* Una `JobPosition` puede recibir múltiples `Application`
+* Una `Application` puede tener un `ApplicationAnalysis`
+* Una `Application` puede tener múltiples `Feedback`
+* Una `Application` puede tener múltiples `Interview`
+
+---
 
 ### Diagrama entidad-relación
 
@@ -334,7 +340,9 @@ erDiagram
     APPLICATION ||--o{ FEEDBACK : receives
     APPLICATION ||--o{ INTERVIEW : includes
     USER ||--o{ FEEDBACK : writes
-````
+```
+
+---
 
 ## Arquitectura de alto nivel
 
@@ -342,28 +350,35 @@ El sistema LTI se basa en una arquitectura desacoplada con separación entre fro
 
 ### Componentes principales
 
-- **Frontend (React)**
-  - Gestión de UI (vacantes, pipeline, feedback)
-  - Comunicación con backend vía API REST
+* **Frontend (React)**
 
-- **Backend (Node.js / Express)**
-  - Gestión de lógica de negocio
-  - Exposición de endpoints REST
-  - Gestión de autenticación y permisos
+  * Gestión de UI (vacantes, pipeline, feedback)
+  * Comunicación con backend vía API REST
 
-- **Base de datos**
-  - Persistencia de entidades principales (JobPosition, Application, etc.)
+* **Backend (Node.js / Express)**
 
-- **Servicio de IA**
-  - Procesamiento de CVs
-  - Generación de scoring
-  - Extracción de información estructurada
+  * Gestión de lógica de negocio
+  * Exposición de endpoints REST
+  * Gestión de autenticación y permisos
 
-- **Sistema de almacenamiento**
-  - Almacenamiento de CVs (ej: S3)
+* **Base de datos**
 
-- **Sistema de notificaciones**
-  - Emails para candidatos (entrevistas, confirmaciones)
+  * Persistencia de entidades principales
+
+* **Servicio de IA**
+
+  * Procesamiento de CVs
+  * Generación de scoring
+
+* **Sistema de almacenamiento**
+
+  * Almacenamiento de CVs (ej: S3)
+
+* **Sistema de notificaciones**
+
+  * Emails para candidatos
+
+---
 
 ### Flujo simplificado
 
@@ -374,8 +389,10 @@ El sistema LTI se basa en una arquitectura desacoplada con separación entre fro
 5. Hiring manager añade feedback
 6. Se planifican entrevistas
 
+---
+
 ### Consideraciones
 
-- Arquitectura preparada para escalar (microservicios en futuro)
-- Procesos de IA desacoplados (async)
-- Separación clara de responsabilidades
+* Arquitectura preparada para escalar
+* Procesos de IA desacoplados (async)
+* Separación clara de responsabilidades
